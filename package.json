@@ -10,8 +10,7 @@
     "lint": "eslint src --max-warnings=0",
     "typecheck": "tsc --project tsconfig.json --noEmit",
     "generate": "yarn plop --plopfile generators/plopfile.js",
-    "postinstall": "husky install",
-    "prepare": "husky install"
+    "postinstall": "husky install"
   },
   "dependencies": {
     "@hookform/resolvers": "^2.8.10",
