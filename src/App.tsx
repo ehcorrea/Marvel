@@ -1,29 +1,14 @@
 import React from 'react';
-import { GoogleSigninButton } from '@react-native-google-signin/google-signin';
-import { useDispatch, useSelector } from 'react-redux';
-import { SafeAreaView, Text } from 'react-native';
+import { SafeAreaView } from 'react-native';
+import { ThemeProvider } from 'styled-components/native';
 
-import { AppDispatch, RootState } from './redux/store';
-import { login } from './redux/auth';
+import theme from './styles/theme';
 
 const App = () => {
-  const { user } = useSelector((state: RootState) => state.authReducer);
-  const dispatch = useDispatch<AppDispatch>();
-
-  const handleLogin = async () => {
-    dispatch(login());
-  };
-
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <GoogleSigninButton
-        style={{ width: 192, height: 48 }}
-        size={GoogleSigninButton.Size.Standard}
-        color={GoogleSigninButton.Color.Dark}
-        onPress={handleLogin}
-      />
-      <Text>{user?.email}</Text>
-    </SafeAreaView>
+    <ThemeProvider theme={theme}>
+      <SafeAreaView style={{ flex: 1 }} />
+    </ThemeProvider>
   );
 };
 
