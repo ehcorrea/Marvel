@@ -1,7 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { AuthState } from './types';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
-import { loginByGoogle } from '../service/auth';
+
+import { AuthState } from './types';
+import { loginByGoogle } from '../../service/auth';
 
 export const login = createAsyncThunk(
   'auth/Login',
