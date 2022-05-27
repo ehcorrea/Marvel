@@ -7,14 +7,12 @@ import { AppDispatch, RootState } from './redux/store';
 import { login } from './redux/auth';
 
 const App = () => {
-  const { user, error } = useSelector((state: RootState) => state.authReducer);
+  const { user } = useSelector((state: RootState) => state.authReducer);
   const dispatch = useDispatch<AppDispatch>();
 
   const handleLogin = async () => {
     dispatch(login());
   };
-
-  console.log(error);
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
