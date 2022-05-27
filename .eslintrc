@@ -34,8 +34,7 @@
         "@typescript-eslint/no-shadow": [
           "error"
         ],
-        "no-shadow": "off",
-        "no-undef": "off",
+        "no-console": "warn",
         "react-hooks/exhaustive-deps": "warn",
         "react-hooks/rules-of-hooks": "error",
         "react/prop-types": "off",
