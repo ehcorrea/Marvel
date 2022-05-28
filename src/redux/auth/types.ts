@@ -4,4 +4,5 @@ export type AuthState = {
   loading: boolean;
   user?: User['user'];
   error: boolean;
+  hasUser: boolean;
 };
