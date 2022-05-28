@@ -1,7 +1,9 @@
 import React from 'react';
-import { LogBox, StatusBar } from 'react-native';
-import { store } from './redux/store';
+import { LogBox } from 'react-native';
 import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+
+import { store, persistor } from './redux/store';
 
 import App from './App';
 
@@ -12,8 +14,9 @@ LogBox.ignoreLogs([
 const Root = () => {
   return (
     <Provider store={store}>
-      <StatusBar barStyle="light-content" backgroundColor="#000" />
-      <App />
+      <PersistGate loading={null} persistor={persistor}>
+        <App />
+      </PersistGate>
     </Provider>
   );
 };
