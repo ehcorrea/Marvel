@@ -33,11 +33,12 @@ export default {
     red: '#FF6347',
   },
   spacings: {
-    xxsmall: '9px',
+    xxsmall: '8px',
     xsmall: '14px',
     medium: '16px',
     large: '20px',
     xlarge: '28px',
     xxlarge: '32px',
+    huge: '44px',
   },
 } as const;
