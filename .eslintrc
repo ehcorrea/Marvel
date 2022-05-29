@@ -1,10 +1,12 @@
 {
   "root": true,
-  "node": true,
   "settings": {
     "react": {
       "version": "detect"
     }
+  },
+  "env": {
+    "node": true
   },
   "extends": [
     "eslint:recommended",
@@ -35,6 +37,7 @@
     "react/prop-types": "off",
     "react/react-in-jsx-scope": "off",
     "@typescript-eslint/explicit-modules-boundary-types": "off",
-    "@typescript-eslint/no-non-null-assertion": "off"
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/no-var-requires": 0
   }
 }
