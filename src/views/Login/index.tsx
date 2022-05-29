@@ -1,8 +1,9 @@
-import { GoogleSigninButton } from '@react-native-google-signin/google-signin';
 import React from 'react';
+import { GoogleSigninButton } from '@react-native-google-signin/google-signin';
 import { useDispatch } from 'react-redux';
-import { login } from '../../redux/auth';
-import { AppDispatch } from '../../redux/store';
+
+import { login } from '../../store/auth';
+import { AppDispatch } from '../../store';
 
 import * as S from './styles';
 
