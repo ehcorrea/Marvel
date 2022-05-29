@@ -62,3 +62,6 @@ buck-out/
 
 # testing
 /coverage
+
+#env stuffs
+**.local
