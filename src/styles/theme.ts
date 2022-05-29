@@ -8,9 +8,12 @@ export default {
     },
   },
   font: {
-    light: 300,
-    normal: 400,
-    bold: 600,
+    wight: {
+      light: 300,
+      normal: 400,
+      bold: 600,
+      xbold: 700,
+    },
     sizes: {
       xsmall: '10px',
       small: '14px',
