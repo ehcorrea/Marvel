@@ -13,7 +13,7 @@ export const Wrapper = styled.View`
   `}
 `;
 
-export const IconSearch = styled.Image`
+export const Icon = styled.Image`
   ${({ theme }) => css`
     height: ${theme.spacings.xsmall};
     width: ${theme.spacings.xsmall};

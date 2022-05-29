@@ -17,12 +17,17 @@ describe('<SearchInput/>', () => {
     expect(onChangeMock).toHaveBeenCalledWith('onChangeText');
   });
 
-  it('shound focus icon', () => {
+  it('shound render input icon and change', () => {
     const onChangeMock = jest.fn();
-    const { getByLabelText } = renderWithTheme(
+    const { getByLabelText, queryByLabelText } = renderWithTheme(
       <SearchInput onChangeText={onChangeMock} />
     );
+    const textInput = getByLabelText('search input');
 
     expect(getByLabelText('search icon')).toBeTruthy();
+
+    fireEvent.changeText(textInput, 'onChangeText');
+    expect(getByLabelText('clear icon')).toBeTruthy();
+    expect(queryByLabelText('search icon')).toBeFalsy();
   });
 });
