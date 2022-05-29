@@ -46,6 +46,6 @@ export type CharactersData = {
 export type Collection = {
   available: number;
   items: {
-    name: '1602 (2003) #1';
+    name: string;
   }[];
 };
