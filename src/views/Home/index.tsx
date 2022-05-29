@@ -1,12 +1,15 @@
 import React from 'react';
-import { Text } from 'react-native';
+import SearchInput from '../../components/SearchInput';
+import Layout from '../../styles/Layout';
 
 import * as S from './styles';
 
 const Home = () => (
-  <S.Wrapper>
-    <Text>Home</Text>
-  </S.Wrapper>
+  <Layout>
+    <S.Wrapper>
+      <SearchInput />
+    </S.Wrapper>
+  </Layout>
 );
 
 export default Home;
