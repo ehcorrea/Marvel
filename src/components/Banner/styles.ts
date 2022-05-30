@@ -1,13 +1,22 @@
+import { Dimensions } from 'react-native';
 import styled, { css } from 'styled-components/native';
 
-export const Wrapper = styled.TouchableOpacity`
-  ${({ theme }) => css`
+import { WrapperProps } from './types';
+
+const wrapperModifiers = {
+  onSlider: () => css`
+    width: ${Dimensions.get('screen').width * 0.9};
+  `,
+};
+
+export const Wrapper = styled.TouchableOpacity<WrapperProps>`
+  ${({ theme, onSlider }) => css`
     background-color: ${theme.colors.mainBg};
     border-radius: ${theme.border.radius.medium};
-    flex: 1;
-    margin: 10px;
-    max-height: 200px;
+    height: 200px;
     position: relative;
+
+    ${onSlider && wrapperModifiers.onSlider()}
   `}
 `;
 
@@ -20,7 +29,6 @@ export const Background = styled.Image`
 
 export const InfosBox = styled.View`
   ${({ theme }) => css`
-    flex: 1;
     padding: ${theme.border.radius.medium} ${theme.border.radius.large};
   `}
   background-color: #181a3e82;
