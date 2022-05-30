@@ -1,5 +1,7 @@
-import styled from 'styled-components/native';
+import styled, { css } from 'styled-components/native';
 
-export const Wrapper = styled.SafeAreaView`
-  flex: 1;
+export const SearchBox = styled.SafeAreaView`
+  ${({ theme }) => css`
+    padding: ${theme.spacings.large} ${theme.spacings.xxsmall};
+  `}
 `;
