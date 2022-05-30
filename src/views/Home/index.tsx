@@ -4,6 +4,7 @@ import { BannerProps } from '../../components/Banner/types';
 import { useDebounce } from '../../hooks';
 import { useGetCharatersQuery } from '../../service/marvel';
 import Layout from '../../styles/Layout';
+import { convertUrlImage } from '../../util/helpers';
 
 import * as S from './styles';
 
@@ -15,12 +16,9 @@ const Home = () => {
   const charactersDataToBannerSlider = useMemo<BannerProps[]>(
     () =>
       data?.data.results.map(({ thumbnail, ...character }) => {
-        const image = `${thumbnail.path}.${thumbnail.extension}`.replace(
-          '://',
-          's://'
-        );
+        const image = `${thumbnail.path}.${thumbnail.extension}`;
         return {
-          image,
+          image: convertUrlImage(image),
           name: character.name,
           type: 'character',
         };
