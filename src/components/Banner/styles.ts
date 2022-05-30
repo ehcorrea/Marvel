@@ -5,7 +5,7 @@ import { WrapperProps } from './types';
 
 const wrapperModifiers = {
   onSlider: () => css`
-    width: ${Dimensions.get('screen').width * 0.9};
+    width: ${Dimensions.get('screen').width * 0.9}px;
   `,
 };
 
