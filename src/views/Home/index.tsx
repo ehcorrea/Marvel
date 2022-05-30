@@ -14,8 +14,8 @@ const Home = () => {
 
   const charactersDataToBannerSlider = useMemo<BannerProps[]>(
     () =>
-      data?.data.results.map(({ thumbnail, ...character }) => {
-        const image = `${thumbnail.path}.${thumbnail.extension}`;
+      data?.data.results.map((character) => {
+        const image = `https://via.placeholder.com/150`;
         return {
           image,
           name: character.name,
