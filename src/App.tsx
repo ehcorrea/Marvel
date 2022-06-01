@@ -4,14 +4,17 @@ import { NavigationContainer } from '@react-navigation/native';
 
 import theme from './styles/theme';
 import Routes from './routes';
+import { Notification } from './components/Container';
 
 const App = () => {
   return (
-    <ThemeProvider theme={theme}>
-      <NavigationContainer>
-        <Routes />
-      </NavigationContainer>
-    </ThemeProvider>
+    <Notification>
+      <ThemeProvider theme={theme}>
+        <NavigationContainer>
+          <Routes />
+        </NavigationContainer>
+      </ThemeProvider>
+    </Notification>
   );
 };
 
