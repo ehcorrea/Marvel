@@ -1,3 +1,5 @@
+import { REACT_APP_SECRETE } from '@env';
+
 module.exports = {
-  app_secret: process.env.REACT_APP_SECRETE,
+  app_secret: REACT_APP_SECRETE,
 };
