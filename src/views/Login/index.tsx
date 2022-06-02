@@ -1,11 +1,13 @@
 import React from 'react';
+import { Image } from 'react-native';
 import { useDispatch } from 'react-redux';
 
 import { loginFake } from '../../store/auth';
 import { AppDispatch } from '../../store';
 
 import * as S from './styles';
-import { Button } from 'react-native';
+
+const iconLock = require('../../assets/images/icon-lock.png');
 
 const Login = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -16,7 +18,12 @@ const Login = () => {
 
   return (
     <S.Wrapper>
-      <Button title="login" onPress={handleLogin} />
+      <S.Button onPress={handleLogin}>
+        <S.IconWrapper>
+          <Image source={iconLock} />
+        </S.IconWrapper>
+        <S.ButtonContent>Fake Login</S.ButtonContent>
+      </S.Button>
     </S.Wrapper>
   );
 };
