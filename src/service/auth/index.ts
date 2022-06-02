@@ -1,4 +1,5 @@
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import { Alert } from 'react-native';
 import { ErrorLoginGoogle } from './types';
 
 export const loginByGoogle = async () => {
@@ -9,6 +10,7 @@ export const loginByGoogle = async () => {
     return user;
   } catch (err) {
     const error = err as ErrorLoginGoogle;
+    Alert.alert('error', String(error.code));
     throw new Error(error.code);
   }
 };
