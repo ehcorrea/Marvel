@@ -1,26 +1,22 @@
 import React from 'react';
-import { GoogleSigninButton } from '@react-native-google-signin/google-signin';
 import { useDispatch } from 'react-redux';
 
-import { login } from '../../store/auth';
+import { loginFake } from '../../store/auth';
 import { AppDispatch } from '../../store';
 
 import * as S from './styles';
+import { Button } from 'react-native';
 
 const Login = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   const handleLogin = () => {
-    dispatch(login());
+    dispatch(loginFake());
   };
 
   return (
     <S.Wrapper>
-      <GoogleSigninButton
-        size={GoogleSigninButton.Size.Wide}
-        color={GoogleSigninButton.Color.Dark}
-        onPress={handleLogin}
-      />
+      <Button title="login" onPress={handleLogin} />
     </S.Wrapper>
   );
 };
