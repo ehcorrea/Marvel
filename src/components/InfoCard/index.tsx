@@ -10,19 +10,24 @@ const InfoCard = ({
   size = 'small',
   type = 'character',
   ...props
-}: InfoCardProps) => (
-  <S.Wrapper accessibilityLabel={`${name} card`} size={size} {...props}>
-    <S.Image
-      accessibilityLabel={`${name} image`}
-      size={size}
-      source={{ uri: image }}
-      type={type}
-    />
-    <S.InfoBox size={size}>
-      <S.Title>{name}</S.Title>
-      <S.SubTitle>{subTitle}</S.SubTitle>
-    </S.InfoBox>
-  </S.Wrapper>
-);
+}: InfoCardProps) => {
+  const renderSubtitle = () =>
+    !!subTitle && <S.SubTitle>{subTitle}</S.SubTitle>;
+
+  return (
+    <S.Wrapper accessibilityLabel={`${name} card`} size={size} {...props}>
+      <S.Image
+        accessibilityLabel={`${name} image`}
+        size={size}
+        source={{ uri: image }}
+        type={type}
+      />
+      <S.InfoBox size={size}>
+        <S.Title>{name}</S.Title>
+        {renderSubtitle()}
+      </S.InfoBox>
+    </S.Wrapper>
+  );
+};
 
 export default InfoCard;

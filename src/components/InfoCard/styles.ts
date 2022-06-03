@@ -38,6 +38,7 @@ export const infoBoxModifiers = {
 
 export const Wrapper = styled.TouchableOpacity<ModifierProps>`
   ${({ theme, size }) => css`
+    align-items: center;
     align-self: flex-start;
     border-radius: ${theme.border.radius.xsmall};
 
