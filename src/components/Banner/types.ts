@@ -1,6 +1,8 @@
+import { ContentType } from '../../types/enum';
+
 export type BannerProps = {
   image: string;
-  type: 'comic' | 'character' | 'event';
+  type: ContentType;
   name: string;
   onPress?: () => void;
   onSlider?: boolean;
