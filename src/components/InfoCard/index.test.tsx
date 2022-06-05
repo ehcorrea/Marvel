@@ -32,8 +32,8 @@ describe('<CharacterCard', () => {
     );
 
     expect(getByLabelText(`${INFO_CARD_MOCK.name} image`)).toHaveStyle({
-      width: 120,
-      height: 120,
+      width: 90,
+      height: 90,
     });
     expect(getByText('Hero Subtitle')).toBeTruthy();
   });
