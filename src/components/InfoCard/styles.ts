@@ -21,8 +21,8 @@ export const imageModifiers = {
   `,
 
   large: ({ type }: ImageProps) => css`
-    height: ${type === ContentType.comic ? 190 : 120}px;
-    width: 120px;
+    height: ${type === ContentType.comic ? 135 : 90}px;
+    width: 90px;
   `,
 };
 
