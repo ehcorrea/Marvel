@@ -6,7 +6,9 @@ export type InfoCardProps = {
   onPress?: () => void;
   size?: 'small' | 'large';
   subTitle?: string;
-  type: ContentType;
+  type?: ContentType;
 };
 
-export type ModifierProps = Pick<InfoCardProps, 'size' | 'type'>;
+export type ImageProps = Pick<InfoCardProps, 'size' | 'type'>;
+
+export type ModifierProps = Pick<InfoCardProps, 'size'>;

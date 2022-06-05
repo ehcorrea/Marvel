@@ -1,4 +1,5 @@
 import React from 'react';
+import { ContentType } from '../../types/enum';
 
 import * as S from './styles';
 import { InfoCardProps } from './types';
@@ -8,14 +9,19 @@ const InfoCard = ({
   image,
   subTitle,
   size = 'small',
-  type = 'character',
+  type = ContentType.character,
   ...props
 }: InfoCardProps) => {
   const renderSubtitle = () =>
     !!subTitle && <S.SubTitle>{subTitle}</S.SubTitle>;
 
   return (
-    <S.Wrapper accessibilityLabel={`${name} card`} size={size} {...props}>
+    <S.Wrapper
+      accessibilityLabel={`${name} card`}
+      size={size}
+      style={{ width: 120 }}
+      {...props}
+    >
       <S.Image
         accessibilityLabel={`${name} image`}
         size={size}
@@ -23,7 +29,9 @@ const InfoCard = ({
         type={type}
       />
       <S.InfoBox size={size}>
-        <S.Title>{name}</S.Title>
+        <S.Title numberOfLines={2} ellipsizeMode="tail">
+          {name}
+        </S.Title>
         {renderSubtitle()}
       </S.InfoBox>
     </S.Wrapper>

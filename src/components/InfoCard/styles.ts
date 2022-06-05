@@ -1,6 +1,7 @@
 import styled, { css, DefaultTheme } from 'styled-components/native';
+import { ContentType } from '../../types/enum';
 
-import { ModifierProps } from './types';
+import { ImageProps, ModifierProps } from './types';
 
 export const wrapperModifiers = {
   small: () => css`
@@ -14,13 +15,13 @@ export const wrapperModifiers = {
 };
 
 export const imageModifiers = {
-  small: ({ type }: ModifierProps) => css`
-    height: ${type === 'comic' ? 75 : 45}px;
+  small: ({ type }: ImageProps) => css`
+    height: ${type === ContentType.comic ? 75 : 45}px;
     width: 45px;
   `,
 
-  large: ({ type }: ModifierProps) => css`
-    height: ${type === 'comic' ? 160 : 120}px;
+  large: ({ type }: ImageProps) => css`
+    height: ${type === ContentType.comic ? 190 : 120}px;
     width: 120px;
   `,
 };
@@ -46,7 +47,7 @@ export const Wrapper = styled.TouchableOpacity<ModifierProps>`
   `}
 `;
 
-export const Image = styled.Image<ModifierProps>`
+export const Image = styled.Image<ImageProps>`
   ${({ theme, size, type }) => css`
     border-radius: ${theme.border.radius.xsmall};
 

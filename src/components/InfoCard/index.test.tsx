@@ -5,6 +5,7 @@ import { fireEvent } from '@testing-library/react-native';
 import { renderWithTheme } from '../../util/tests/helper';
 import InfoCard from '.';
 import INFO_CARD_MOCK from './mock';
+import { ContentType } from '../../types/enum';
 
 describe('<CharacterCard', () => {
   it('should render small component by default and elements', () => {
@@ -39,7 +40,11 @@ describe('<CharacterCard', () => {
 
   it('should render comic style when type is comic', () => {
     const { getByLabelText } = renderWithTheme(
-      <InfoCard {...INFO_CARD_MOCK} subTitle="Hero Subtitle" type="comic" />
+      <InfoCard
+        {...INFO_CARD_MOCK}
+        subTitle="Hero Subtitle"
+        type={ContentType.comic}
+      />
     );
 
     expect(getByLabelText(`${INFO_CARD_MOCK.name} image`)).toHaveStyle({
