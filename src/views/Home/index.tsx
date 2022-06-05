@@ -1,37 +1,120 @@
 import React, { useMemo, useState } from 'react';
-import { SearchInput, BannerSlider } from '../../components';
-import { BannerProps } from '../../components/Banner/types';
-import { useDebounce } from '../../hooks';
-import { useGetCharatersQuery } from '../../service/marvel';
-import Layout from '../../styles/Layout';
+import { View } from 'react-native';
+import { FlatList } from 'react-native-gesture-handler';
+
+import { useGetCharatersQuery, useGetComicsQuery } from '../../service/marvel';
 import { convertUrlImage } from '../../util/helpers';
+import Layout from '../../styles/Layout';
+
+import { useDebounce } from '../../hooks';
+
+import {
+  SearchInput,
+  FavoriteButton,
+  BannerSlider,
+  InfoCardSlider,
+} from '../../components';
+
+import { ContentType } from '../../types/enum';
+import { BannerProps } from '../../components/Banner/types';
+import { FavoriteButtonProps } from '../../components/FavoriteButton/types';
+import { InfoCardProps } from '../../components/InfoCard/types';
 
 import * as S from './styles';
+
+const FAVORITES_MOCK: FavoriteButtonProps[] = [
+  {},
+  {
+    contentType: ContentType.character,
+    title: 'Second',
+  },
+  {
+    contentType: ContentType.character,
+    title: 'A-Bomb',
+  },
+  {
+    contentType: ContentType.character,
+    title: 'Spider-Man',
+  },
+  {
+    contentType: ContentType.character,
+    title: 'A-Bomb',
+  },
+  {
+    contentType: ContentType.character,
+    title: 'Spider-Man',
+  },
+  {
+    contentType: ContentType.character,
+    title: 'Last',
+  },
+];
 
 const Home = () => {
   const [searchValue, setSearchValue] = useState('');
   const debouncedValue = useDebounce(searchValue, 1000);
-  const { data } = useGetCharatersQuery({ nameStartsWith: debouncedValue });
+  const { data: characterData } = useGetCharatersQuery({
+    nameStartsWith: debouncedValue,
+  });
+  const { data: comicData } = useGetComicsQuery({
+    titleStartsWith: debouncedValue,
+  });
 
   const charactersDataToBannerSlider = useMemo<BannerProps[]>(
     () =>
-      data?.data.results.map(({ thumbnail, ...character }) => {
+      characterData?.data.results.map(({ thumbnail, ...character }) => {
         const image = `${thumbnail.path}.${thumbnail.extension}`;
         return {
           image: convertUrlImage(image),
           name: character.name,
-          type: 'character',
+          type: ContentType['character'],
         };
       }) || [],
-    [data]
+    [characterData]
+  );
+
+  const comicDataToCardInfoSlider = useMemo<InfoCardProps[]>(
+    () =>
+      comicData?.data.results.map(({ thumbnail, ...character }) => {
+        const image = `${thumbnail.path}.${thumbnail.extension}`;
+        return {
+          image: convertUrlImage(image),
+          name: character.title,
+          type: ContentType['comic'],
+          size: 'large',
+        };
+      }) || [],
+    [comicData]
   );
 
   return (
     <Layout>
-      <S.SearchBox>
-        <SearchInput onChangeText={setSearchValue} />
-      </S.SearchBox>
-      <BannerSlider items={charactersDataToBannerSlider} />
+      <View style={{ flex: 1 }}>
+        <S.SearchBox>
+          <SearchInput onChangeText={setSearchValue} />
+        </S.SearchBox>
+        <S.CommicSection>
+          <BannerSlider items={charactersDataToBannerSlider} />
+        </S.CommicSection>
+
+        <S.CharactersSection>
+          <S.Title>Commics</S.Title>
+          <InfoCardSlider items={comicDataToCardInfoSlider} />
+        </S.CharactersSection>
+
+        <S.FavouritesSection style={{ flex: 1 }}>
+          <S.Title>Favourites Characters</S.Title>
+          <FlatList
+            contentContainerStyle={{ marginLeft: 20, paddingBottom: 20 }}
+            data={FAVORITES_MOCK}
+            ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
+            renderItem={({ item }) => (
+              <FavoriteButton {...item} withAnimation />
+            )}
+            showsVerticalScrollIndicator={false}
+          />
+        </S.FavouritesSection>
+      </View>
     </Layout>
   );
 };
