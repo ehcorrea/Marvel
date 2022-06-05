@@ -10,6 +10,8 @@ const InfoCardSlider = ({ items }: InfoCardSliderProps) => {
   return (
     <S.Wrapper>
       <FlatList
+        style={{ paddingHorizontal: 16 }}
+        showsHorizontalScrollIndicator={false}
         horizontal
         data={items}
         renderItem={({ item }) => <InfoCard {...item} />}

@@ -9,6 +9,8 @@ const BannerSlider = ({ items }: BannerSliderProps) => {
   return (
     <S.Wrapper>
       <FlatList
+        style={{ paddingLeft: 16 }}
+        showsHorizontalScrollIndicator={false}
         horizontal
         data={items}
         renderItem={({ item }) => <Banner {...item} onSlider />}
