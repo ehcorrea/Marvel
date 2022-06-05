@@ -1,14 +1,4 @@
-export type MarvelResponse<T> = {
-  code: number;
-  status: string;
-  data: {
-    offset: number;
-    limit: number;
-    total: number;
-    count: number;
-    results: T[];
-  };
-};
+import { Characters, Creators, Events, Stories } from './summaries';
 
 export type CharactersRequest = {
   nameStartsWith?: string;
@@ -18,8 +8,6 @@ export type CharactersRequest = {
   events?: number;
   stories?: number;
   orderBy?: CharactersOrderBy;
-  limit?: number;
-  offset?: number;
 };
 
 export enum CharactersOrderBy {
@@ -37,15 +25,8 @@ export type CharactersData = {
     path: string;
     extension: string;
   };
-  comics: Collection[];
-  series: Collection[];
-  stories: Collection[];
-  events: Collection[];
-};
-
-export type Collection = {
-  available: number;
-  items: {
-    name: string;
-  }[];
+  creators: Creators;
+  characters: Characters;
+  stories: Stories;
+  events: Events;
 };

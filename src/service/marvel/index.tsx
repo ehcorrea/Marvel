@@ -4,7 +4,7 @@ import {
   generateQueryParamsStringFromObject,
   generateHash,
 } from '../../util/helpers';
-import { MarvelResponse, CharactersData, CharactersRequest } from './types';
+import { Requests, Characters, Comics } from './types';
 
 const { hash, timestamp, PUBLIC_KEY } = generateHash();
 
@@ -15,15 +15,24 @@ export const marvelApi = createApi({
   }),
   endpoints: (builder) => ({
     getCharaters: builder.query<
-      MarvelResponse<CharactersData>,
-      CharactersRequest
+      Requests.MarvelResponse<Characters.CharactersData>,
+      Requests.MarvelDefaultReques<Characters.CharactersRequest>
     >({
       query: (filter) => {
         const queryParams = generateQueryParamsStringFromObject(filter);
         return `/characters?ts=${timestamp}${queryParams}&apikey=${PUBLIC_KEY}&hash=${hash}`;
       },
     }),
+    getComics: builder.query<
+      Requests.MarvelResponse<Comics.ComicsData>,
+      Requests.MarvelDefaultReques<Comics.ComicsRequest>
+    >({
+      query: (filter) => {
+        const queryParams = generateQueryParamsStringFromObject(filter);
+        return `/comics?ts=${timestamp}${queryParams}&apikey=${PUBLIC_KEY}&hash=${hash}`;
+      },
+    }),
   }),
 });
 
-export const { useGetCharatersQuery } = marvelApi;
+export const { useGetCharatersQuery, useGetComicsQuery } = marvelApi;
