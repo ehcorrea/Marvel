@@ -1,12 +1,15 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
+import { REACT_APP_MARVEL_PUBLIC_KEY } from '@env';
+
 import {
   generateQueryParamsStringFromObject,
   generateHash,
 } from '../../util/helpers';
+
 import { Requests, Characters, Comics } from './types';
 
-const { hash, timestamp, PUBLIC_KEY } = generateHash();
+const { hash, timestamp } = generateHash();
 
 export const marvelApi = createApi({
   reducerPath: 'marvelApi',
@@ -20,7 +23,7 @@ export const marvelApi = createApi({
     >({
       query: (filter) => {
         const queryParams = generateQueryParamsStringFromObject(filter);
-        return `/characters?ts=${timestamp}${queryParams}&apikey=${PUBLIC_KEY}&hash=${hash}`;
+        return `/characters?ts=${timestamp}${queryParams}&apikey=${REACT_APP_MARVEL_PUBLIC_KEY}&hash=${hash}`;
       },
     }),
     getComics: builder.query<
@@ -29,7 +32,7 @@ export const marvelApi = createApi({
     >({
       query: (filter) => {
         const queryParams = generateQueryParamsStringFromObject(filter);
-        return `/comics?ts=${timestamp}${queryParams}&apikey=${PUBLIC_KEY}&hash=${hash}`;
+        return `/comics?ts=${timestamp}${queryParams}&apikey=${REACT_APP_MARVEL_PUBLIC_KEY}&hash=${hash}`;
       },
     }),
   }),
