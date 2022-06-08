@@ -14,12 +14,10 @@ const BottomTab = () => {
       screenOptions={{
         header: () => <></>,
         tabBarStyle: {
-          position: 'absolute',
           backgroundColor: theme.colors.secondary,
           height: 50,
           borderTopWidth: 0,
         },
-        tabBarHideOnKeyboard: true,
       }}
     >
       <Tab.Screen
