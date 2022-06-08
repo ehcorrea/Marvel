@@ -3,14 +3,17 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import type { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 
 type StackParamList = {
-  Login: undefined;
+  login: undefined;
+  TabBottom: undefined;
+  home: undefined;
+  search: undefined;
 };
 
 type TabParamList = {
-  Home: undefined;
+  HomeRoutes: undefined;
 };
 
-export type ProfileScreenNavigation = CompositeNavigationProp<
+export type RoutesNavigation = CompositeNavigationProp<
   StackNavigationProp<StackParamList>,
   BottomTabNavigationProp<TabParamList>
 >;
