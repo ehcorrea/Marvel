@@ -32,7 +32,7 @@ const FavoriteButton = ({
   const handlePress = () => {
     if (withAnimation) {
       sharedValue.value = withSequence(withTiming(100), withTiming(0));
-      return setTimeout(() => onPress?.(), 500);
+      return setTimeout(onPress, 500);
     }
     onPress?.();
   };
