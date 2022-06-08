@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import { View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 
@@ -6,13 +6,11 @@ import { useGetCharatersQuery, useGetComicsQuery } from '../../service/marvel';
 import { convertUrlImage } from '../../util/helpers';
 import Layout from '../../styles/Layout';
 
-import { useDebounce } from '../../hooks';
-
 import {
-  SearchInput,
   FavoriteButton,
   BannerSlider,
   InfoCardSlider,
+  SearchButton,
 } from '../../components';
 
 import { ContentType } from '../../types/enum';
@@ -51,14 +49,8 @@ const FAVORITES_MOCK: FavoriteButtonProps[] = [
 ];
 
 const Home = () => {
-  const [searchValue, setSearchValue] = useState('');
-  const debouncedValue = useDebounce(searchValue, 1000);
-  const { data: characterData } = useGetCharatersQuery({
-    nameStartsWith: debouncedValue,
-  });
-  const { data: comicData } = useGetComicsQuery({
-    titleStartsWith: debouncedValue,
-  });
+  const { data: characterData } = useGetCharatersQuery({});
+  const { data: comicData } = useGetComicsQuery({});
 
   const charactersDataToBannerSlider = useMemo<BannerProps[]>(
     () =>
@@ -91,7 +83,7 @@ const Home = () => {
     <Layout>
       <View style={{ flex: 1 }}>
         <S.SearchBox>
-          <SearchInput onChangeText={setSearchValue} />
+          <SearchButton />
         </S.SearchBox>
         <S.CommicSection>
           <BannerSlider items={charactersDataToBannerSlider} />
