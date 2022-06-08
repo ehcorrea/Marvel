@@ -3,14 +3,12 @@ import TabMenuItem from '.';
 import theme from '../../styles/theme';
 
 import { renderWithTheme } from '../../util/tests/helper';
+import iconHome from '../../assets/images/icon-home.png';
 
 describe('<TabMenuItem/>', () => {
   it('should render component with default style', () => {
     const { getByLabelText, getByRole } = renderWithTheme(
-      <TabMenuItem
-        iconSource={require('../../assets/images/icon-home.png')}
-        accessibilityLabel="tab mock icon"
-      />
+      <TabMenuItem iconSource={iconHome} accessibilityLabel="tab mock icon" />
     );
     const iconWrapper = getByLabelText('tab mock icon');
     const icon = getByRole('image');
@@ -24,7 +22,7 @@ describe('<TabMenuItem/>', () => {
   it('should render component with focused style', () => {
     const { getByLabelText, getByRole } = renderWithTheme(
       <TabMenuItem
-        iconSource={require('../../assets/images/icon-home.png')}
+        iconSource={iconHome}
         accessibilityLabel="tab mock icon"
         focused
       />

@@ -3,6 +3,10 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { TabMenuItem } from '../../../components';
 import theme from '../../../styles/theme';
+import iconProfile from '../../../assets/images/icon-profile.png';
+import iconHome from '../../../assets/images/icon-home.png';
+import iconFavorite from '../../../assets/images/icon-favorite.png';
+
 import HomeRoutes from '../Home';
 
 const Tab = createBottomTabNavigator();
@@ -28,7 +32,7 @@ const BottomTab = () => {
           tabBarIcon: ({ focused }) => (
             <TabMenuItem
               focused={focused}
-              iconSource={require('../../../assets/images/icon-profile.png')}
+              iconSource={iconProfile}
               accessibilityLabel="profile tab button"
             />
           ),
@@ -43,7 +47,7 @@ const BottomTab = () => {
           tabBarIcon: ({ focused }) => (
             <TabMenuItem
               focused={focused}
-              iconSource={require('../../../assets/images/icon-home.png')}
+              iconSource={iconHome}
               accessibilityLabel="home tab button"
             />
           ),
@@ -58,7 +62,7 @@ const BottomTab = () => {
           tabBarIcon: ({ focused }) => (
             <TabMenuItem
               focused={focused}
-              iconSource={require('../../../assets/images/icon-favorite.png')}
+              iconSource={iconFavorite}
               accessibilityLabel="favorites tab  button"
             />
           ),

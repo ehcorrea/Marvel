@@ -7,11 +7,11 @@ import React, {
 } from 'react';
 import { TextInput, TouchableOpacity } from 'react-native';
 
+import iconSearch from '../../assets/images/icon-search.png';
+import iconClear from '../../assets/images/icon-close.png';
+
 import * as S from './styles';
 import { SearchInputProps } from './types';
-
-const iconSearch = require('../../assets/images/icon-search.png');
-const iconClear = require('../../assets/images/icon-close.png');
 
 const SearchInput = ({ onChangeText, ...props }: SearchInputProps) => {
   const [value, setValue] = useState<string>();

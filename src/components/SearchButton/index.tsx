@@ -1,10 +1,10 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 
-import * as S from './styles';
-import { RoutesNavigation } from '../../../routes/types';
+import { RoutesNavigation } from '../../routes/types';
+import searchIcon from '../../assets/images/icon-search.png';
 
-const searchIcon = require('../../assets/images/icon-search.png');
+import * as S from './styles';
 
 const SearchButton = () => {
   const navigation = useNavigation<RoutesNavigation>();

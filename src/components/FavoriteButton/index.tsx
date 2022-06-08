@@ -5,6 +5,10 @@ import {
   withSequence,
   withTiming,
 } from 'react-native-reanimated';
+
+import iconAddFarovite from '../../assets/images/icon-add-favorite.png';
+import iconClickFarovite from '../../assets/images/icon-click-favorite.png';
+
 import { ContentType } from '../../types/enum';
 
 import * as S from './styles';
@@ -23,9 +27,7 @@ const FavoriteButton = ({
     ? `click ${title} icon`
     : `click add ${contentType} icon`;
 
-  const iconImage = title
-    ? require('../../assets/images/icon-click-favorite.png')
-    : require('../../assets/images/icon-add-favorite.png');
+  const iconImage = title ? iconClickFarovite : iconAddFarovite;
 
   const handlePress = () => {
     if (withAnimation) {
