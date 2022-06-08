@@ -22,7 +22,7 @@ const BottomTab = () => {
     >
       <Tab.Screen
         name="profile"
-        component={() => null}
+        component={HomeRoutes}
         options={{
           tabBarLabel: '',
           tabBarIcon: ({ focused }) => (
@@ -52,7 +52,7 @@ const BottomTab = () => {
 
       <Tab.Screen
         name="favorites"
-        component={() => null}
+        component={HomeRoutes}
         options={{
           tabBarLabel: '',
           tabBarIcon: ({ focused }) => (
