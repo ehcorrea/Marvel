@@ -5,7 +5,7 @@ import 'react-native-reanimated';
 
 import theme from './styles/theme';
 import Routes from './routes';
-import { Notification } from './components/Container';
+import { Notification } from './components/';
 
 const App = () => {
   return (
