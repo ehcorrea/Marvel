@@ -1,15 +1,15 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import TabHome from './Home';
+import BottomTab from './BottomTab';
 
 const Stack = createStackNavigator();
 
 const LoggedRoutes = () => (
   <Stack.Navigator>
     <Stack.Screen
-      name="tabHome"
-      component={TabHome}
+      name="BottomTab"
+      component={BottomTab}
       options={{ header: () => <></> }}
     />
   </Stack.Navigator>
