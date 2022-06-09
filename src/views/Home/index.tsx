@@ -21,30 +21,36 @@ import { InfoCardProps } from '../../components/InfoCard/types';
 import * as S from './styles';
 
 const FAVORITES_MOCK: FavoriteButtonProps[] = [
-  {},
+  { onPress: () => null },
   {
     contentType: ContentType.character,
     title: 'Second',
+    onPress: () => null,
   },
   {
     contentType: ContentType.character,
     title: 'A-Bomb',
+    onPress: () => null,
   },
   {
     contentType: ContentType.character,
     title: 'Spider-Man',
+    onPress: () => null,
   },
   {
     contentType: ContentType.character,
     title: 'A-Bomb',
+    onPress: () => null,
   },
   {
     contentType: ContentType.character,
     title: 'Spider-Man',
+    onPress: () => null,
   },
   {
     contentType: ContentType.character,
     title: 'Last',
+    onPress: () => null,
   },
 ];
 

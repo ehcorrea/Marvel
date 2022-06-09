@@ -11,6 +11,6 @@ describe('<Banner/>', () => {
       <BannerSlider {...BANNER_SLIDER_MOCK} />
     );
 
-    expect(getAllByText('character').length).toEqual(3);
+    expect(getAllByText('Character').length).toEqual(3);
   });
 });

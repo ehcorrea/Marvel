@@ -1,3 +1,4 @@
+import { ContentType } from '../../types/enum';
 import { BannerSliderProps } from './types';
 
 const BANNER_MOCK: BannerSliderProps = {
@@ -5,17 +6,17 @@ const BANNER_MOCK: BannerSliderProps = {
     {
       image: 'https://via.placeholder.com/150',
       name: 'Hero Mock 1',
-      type: 'character',
+      type: ContentType.character,
     },
     {
       image: 'https://via.placeholder.com/150',
       name: 'Hero Mock 2',
-      type: 'character',
+      type: ContentType.character,
     },
     {
       image: 'https://via.placeholder.com/150',
       name: 'Hero Mock 3',
-      type: 'character',
+      type: ContentType.character,
     },
   ],
 };
