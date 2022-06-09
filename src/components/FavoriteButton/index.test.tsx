@@ -38,7 +38,7 @@ describe('<FavoriteButton/>', () => {
     expect(getByLabelText(`click ${LABEL_TEXT} icon`)).toBeTruthy();
   });
 
-  it('should wait animation', async () => {
+  it('should wait animation', () => {
     const onPressMock = jest.fn();
     const LABEL_TEXT = 'Hero Mock';
 
@@ -48,7 +48,7 @@ describe('<FavoriteButton/>', () => {
 
     const touchableElement = getByLabelText(LABEL_TEXT);
 
-    await fireEvent.press(touchableElement);
+    fireEvent.press(touchableElement);
 
     expect(setTimeout).toHaveBeenLastCalledWith(onPressMock, 500);
   });
