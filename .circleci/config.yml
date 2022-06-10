@@ -6,18 +6,21 @@ jobs:
       - image: circleci/node:10.16.3
     steps:
       - checkout
-      - run:
-          name: Update NPM
-          command: 'sudo npm install -g npm@5'
-      - restore_cache:
-          key: dependency-cache-{{ checksum "package-lock.json" }}
+
       - run:
           name: Install Dependencies
-          command: npm install
+          command: yarn install
+
       - save_cache:
-          key: dependency-cache-{{ checksum "package-lock.json" }}
+          key: yarn-v1-{{ checksum "yarn.lock" }}-{{ arch }}
           paths:
-            - ./node_modules
-      - run:
-          name: Run tests
-          command: npm run test
+            - ~/.cache/yarn
+
+      - save_cache:
+          key: node-v1-{{ checksum "package.json" }}-{{ arch }}
+          paths:
+            - node_modules
+
+     - run:
+          name: jest tests
+          command: yarn test

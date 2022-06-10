@@ -1,5 +1,5 @@
 {
-  "name": "simple-react-native-boilerplate",
+  "name": "emilio-correa-marvel",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -11,7 +11,8 @@
     "test:ci": "jest --runInBand",
     "lint": "eslint src --max-warnings=0",
     "typecheck": "tsc --project tsconfig.json --noEmit",
-    "generate": "yarn plop --plopfile generators/plopfile.js"
+    "generate": "yarn plop --plopfile generators/plopfile.js",
+    "release:android": "cd android && ./gradlew assembleRelease"
   },
   "dependencies": {
     "@hookform/resolvers": "^2.8.10",
