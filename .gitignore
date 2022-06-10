@@ -65,3 +65,6 @@ buck-out/
 
 #env stuffs
 **.local
+
+# stryker temp files
+.stryker-tmp
