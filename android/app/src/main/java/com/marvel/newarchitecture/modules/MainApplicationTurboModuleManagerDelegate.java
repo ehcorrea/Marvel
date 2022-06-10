@@ -1,4 +1,4 @@
-package com.marvel.newarchitecture.modules;
+package emilio.correa.marvel.newarchitecture.modules;
 
 import com.facebook.jni.HybridData;
 import com.facebook.react.ReactPackage;

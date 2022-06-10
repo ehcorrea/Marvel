@@ -1,4 +1,4 @@
-package com.marvel.newarchitecture;
+package emilio.correa.marvel.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -19,9 +19,9 @@ import com.facebook.react.fabric.CoreComponentsRegistry;
 import com.facebook.react.fabric.EmptyReactNativeConfig;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.marvel.BuildConfig;
-import com.marvel.newarchitecture.components.MainComponentsRegistry;
-import com.marvel.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import emilio.correa.marvel.BuildConfig;
+import emilio.correa.marvel.newarchitecture.components.MainComponentsRegistry;
+import emilio.correa.marvel.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 

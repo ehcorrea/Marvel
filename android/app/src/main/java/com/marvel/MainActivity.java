@@ -1,4 +1,4 @@
-package com.marvel;
+package emilio.correa.marvel;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;

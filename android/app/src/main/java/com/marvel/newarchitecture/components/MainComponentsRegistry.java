@@ -1,4 +1,4 @@
-package com.marvel.newarchitecture.components;
+package emilio.correa.marvel.newarchitecture.components;
 
 import com.facebook.jni.HybridData;
 import com.facebook.proguard.annotations.DoNotStrip;
