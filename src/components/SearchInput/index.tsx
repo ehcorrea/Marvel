@@ -1,10 +1,4 @@
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
 import { TextInput, TouchableOpacity } from 'react-native';
 
 import iconSearch from '../../assets/images/icon-search.png';
@@ -14,7 +8,7 @@ import * as S from './styles';
 import { SearchInputProps } from './types';
 
 const SearchInput = ({ onChangeText, ...props }: SearchInputProps) => {
-  const [value, setValue] = useState<string>();
+  const [value, setValue] = useState<string>('');
   const inputRef = useRef<TextInput>(null);
 
   const handleFocusInput = useCallback(() => {
@@ -27,11 +21,8 @@ const SearchInput = ({ onChangeText, ...props }: SearchInputProps) => {
 
   const handleChangeText = (inputValue: string) => {
     setValue(inputValue);
+    onChangeText?.(inputValue);
   };
-
-  useEffect(() => {
-    onChangeText?.(value || '');
-  }, [onChangeText, value]);
 
   const renderIcon = useMemo(() => {
     const hasValue = !!value;
