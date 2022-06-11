@@ -23,8 +23,8 @@ jobs:
         uses: timheuer/base64-to-file@v1
 
         with:
-          secret: ${{ secrets.ANDROID_SIGNING_KEY }}
-          encodedString: release_keystore.jks
+          encodedString: ${{ secrets.ANDROID_SIGNING_KEY }}
+          fileName: release_keystore.jks
 
       - name: Set up our JDK environment # setup JDK environment: mandatory as we need to build  android project
 
