@@ -17,11 +17,6 @@ jobs:
 
         uses: actions/checkout@v2
 
-      - name: Decode Keystore ## sign generated apk
-        run: |
-
-          TMP_KEYSTORE_FILE_PATH="${RUNNER_TEMP}"/keystore mkdir "${TMP_KEYSTORE_FILE_PATH}" echo $ENCODED_STRING | base64 -di > sudo "${TMP_KEYSTORE_FILE_PATH}"/release_keystore.jks
-
       - name: Set up our JDK environment # setup JDK environment: mandatory as we need to build  android project
 
         uses: actions/setup-java@v1.4.3
@@ -80,7 +75,18 @@ jobs:
 
       - name: Make Gradlew Executable
 
-        run: cd android && chmod +x ./gradlew
+        run:
+          cd android && chmod +x ./gradlew
+
+          ## sign generated apk
+
+      - name: Decode Keystore
+        id: decode_keystore
+        uses: davidSchuppa/base64Secret-toFile-action@v1
+        with:
+          secret: ${{ secrets.secrets.ANDROID_SIGNING_KEY }}
+          filename: keystore/release_keystore.jks
+          destination-path: android/app
 
       - name: Generate App APK
 
