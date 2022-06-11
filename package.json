@@ -12,7 +12,9 @@
     "lint": "eslint src --max-warnings=0",
     "typecheck": "tsc --project tsconfig.json --noEmit",
     "generate": "yarn plop --plopfile generators/plopfile.js",
-    "release:android": "cd android && ./gradlew assembleRelease"
+    "release:android": "cd android && ./gradlew assembleRelease",
+    "np": "np --no-publish",
+    "postversion": "react-native-version"
   },
   "dependencies": {
     "@hookform/resolvers": "^2.8.10",
@@ -74,7 +76,9 @@
     "lint-staged": "^12.4.2",
     "metro-babel-register": "^0.71.0",
     "metro-react-native-babel-preset": "^0.67.0",
+    "np": "^7.6.1",
     "plop": "^3.1.0",
+    "react-native-version": "^4.0.0",
     "react-test-renderer": "17.0.2",
     "stryker-cli": "^1.0.2",
     "styled-components-react-native": "^1.0.0",
@@ -98,5 +102,9 @@
       "json",
       "node"
     ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ehcorrea/marvel-app.git"
   }
 }
