@@ -240,10 +240,10 @@ android {
             keyPassword 'android'
         }
         release {
-          storeFile = file("release.keystore")
-          storePassword System.getenv("ANDROID_KEY_STORE_PASSWORD")
-          keyAlias System.getenv("ANDROID_ALIAS ")
-          keyPassword System.getenv("ANDROID_KEY_PASSWORD")
+          storeFile file(MYAPP_UPLOAD_STORE_FILE)
+          storePassword MYAPP_UPLOAD_STORE_PASSWORD
+          keyAlias MYAPP_UPLOAD_KEY_ALIAS
+          keyPassword MYAPP_UPLOAD_KEY_PASSWORD
         }
     }
     buildTypes {
