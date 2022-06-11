@@ -17,15 +17,6 @@ jobs:
 
         uses: actions/checkout@v2
 
-      - name: Decode Keystore
-        id: decode_keystore
-
-        uses: timheuer/base64-to-file@v1
-
-        with:
-          encodedString: ${{ secrets.ANDROID_SIGNING_KEY }}
-          fileName: release_keystore.jks
-
       - name: Set up our JDK environment # setup JDK environment: mandatory as we need to build  android project
 
         uses: actions/setup-java@v1.4.3
@@ -84,10 +75,7 @@ jobs:
 
       - name: Make Gradlew Executable
 
-        run:
-          cd android && chmod +x ./gradlew
-
-          ## sign generated apk
+        run: cd android && chmod +x ./gradlew
 
       - name: Generate App APK
 
@@ -95,13 +83,24 @@ jobs:
 
           cd android && ./gradlew assembleRelease --no-daemon
 
-          env:
+      ## sign generated apk
 
-          SIGNING_KEY_ALIAS: ${{ secrets.ANDROID_ALIAS }}
+      - name: Sign APK
 
-          SIGNING_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        id: sign_app
 
-          SIGNING_STORE_PASSWORD: ${{ secrets.ANDROID_KEY_STORE_PASSWORD }}
+        uses: r0adkll/sign-android-release@v1
+
+        with:
+          releaseDirectory: android/app/build/outputs/apk/release
+
+          signingKeyBase64: ${{ secrets.ANDROID_SIGNING_KEY }}
+
+          alias: ${{ secrets.ANDROID_ALIAS }}
+
+          keyStorePassword: ${{ secrets.ANDROID_KEY_STORE_PASSWORD }}
+
+          keyPassword: ${{ secrets.ANDROID_KEY_PASSWORD }}
 
       ## Distribute app to Firebase App Distribution for testing / use google play internal track if you have a google play account
 
@@ -114,6 +113,6 @@ jobs:
 
           token: ${{secrets.ANDROID_FIREBASE_TOKEN}}
 
-          groups: General
+          groups: testers
 
-          file: android/app/build/outputs/apk/release
+          file: ${{steps.sign_app.outputs.signedReleaseFile}}
