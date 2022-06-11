@@ -35,6 +35,7 @@ jobs:
           REACT_APP_MARVEL_PUBLIC_KEY: ${{ secrets.REACT_APP_MARVEL_PUBLIC_KEY }}
           REACT_APP_MARVEL_PRIVATE_KEY: ${{ secrets.REACT_APP_MARVEL_PRIVATE_KEY }}
         run: cd android && ./gradlew assembleRelease
+
       - name: Sign APK
         id: sign_app
         uses: r0adkll/sign-android-release@v1
