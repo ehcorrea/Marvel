@@ -20,12 +20,11 @@ jobs:
       - name: Decode Keystore
         id: decode_keystore
 
-        uses: davidSchuppa/base64Secret-toFile-action@v1
+        uses: timheuer/base64-to-file@v1
 
         with:
           secret: ${{ secrets.ANDROID_SIGNING_KEY }}
-          filename: release_keystore.jks
-          destination-path: ~/
+          encodedString: release_keystore.jks
 
       - name: Set up our JDK environment # setup JDK environment: mandatory as we need to build  android project
 
