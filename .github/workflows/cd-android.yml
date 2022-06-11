@@ -11,8 +11,7 @@ jobs:
     name: CD Android
 
     runs-on: ubuntu-latest
-
-    steps:
+    
       steps:
         - name: Download artifact
 
