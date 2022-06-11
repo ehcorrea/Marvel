@@ -6,6 +6,10 @@ on:
   release:
     types: [published] # only run the workflow when a new release has been published
 
+  pull_request:
+    branches:
+      - main
+
 jobs:
   android-build:
     name: Android Build
@@ -43,6 +47,7 @@ jobs:
 
           restore-keys: |
             ${{ runner.os }}-yarn-
+
       - name: Install dependencies # install project deps with --frozen-lockfile to make sure we will have the same packages version ( very recommended  on running yarn install on ci)
         run: yarn install --frozen-lockfile
 
