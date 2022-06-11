@@ -41,4 +41,4 @@ jobs:
           appId: ${{secrets.ANDROID_FIREBASE_APP_ID}}
           token: ${{secrets.ANDROID_FIREBASE_TOKEN}}
           groups: testers
-          file: ${{steps.unzip_file.outputs.signedReleaseFile}}
+          file: ${{ steps.unzip_file.outputs.app-release-unsigned-signed.apk }}
