@@ -1,7 +1,6 @@
 name: CI
 
-# Controls when the workflow will run
-on:
+    on:
     pull_request:
         branches: [ "master", "main" ]
     workflow_dispatch:
