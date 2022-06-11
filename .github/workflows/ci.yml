@@ -45,3 +45,15 @@ jobs:
           alias: ${{ secrets.ANDROID_ALIAS }}
           keyStorePassword: ${{ secrets.ANDROID_KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.ANDROID_KEY_PASSWORD }}
+  
+      - name: Save Signed Artifact
+        env: 
+          SIGNED_ARTIFACT: ${{steps.sign_app.outputs.signedReleaseFile}}
+        run: mkdir -p ./artifact echo $SIGNED_ARTIFACT > ./artifact/signedReleaseFile
+        
+      - uses: actions/upload-artifact@v
+        with:
+          name: signedReleaseFile
+          path: artifact/
+          
+        
