@@ -25,6 +25,7 @@ jobs:
         with:
           secret: ${{ secrets.ANDROID_SIGNING_KEY }}
           filename: release_keystore.jks
+          destination-path: ~/
 
       - name: Set up our JDK environment # setup JDK environment: mandatory as we need to build  android project
 
