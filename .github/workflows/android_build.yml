@@ -18,15 +18,11 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Decode Keystore ## sign generated apk
-        id: decode_keystore
-        uses: timheuer/base64-to-file@v1.1
-
-        with:
-          fileName: 'release_keystore.jks'
-
-          fileDir: 'android/app'
-
-          encodedString: ${{ secrets.ANDROID_SIGNING_KEY }}
+        
+         run: |
+            TMP_KEYSTORE_FILE_PATH="${RUNNER_TEMP}"/keystore
+            mkdir "${TMP_KEYSTORE_FILE_PATH}"
+            echo $ENCODED_STRING | base64 -di > "${TMP_KEYSTORE_FILE_PATH}"/release_keystore.jks
 
       - name: Set up our JDK environment # setup JDK environment: mandatory as we need to build  android project
 
