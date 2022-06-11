@@ -2,10 +2,10 @@ name: CD Android
 
 on:
     workflow_run:
-      workflows: [CI]
+      workflows: ['CI']
       types:  
         - completed
-
+    workflow_dispatch:
 jobs:
   download:
     runs-on: ubuntu-latest
