@@ -84,7 +84,7 @@ jobs:
         id: decode_keystore
         uses: davidSchuppa/base64Secret-toFile-action@v1
         with:
-          secret: ${{ secrets.secrets.ANDROID_SIGNING_KEY }}
+          secret: ${{ secrets.ANDROID_SIGNING_KEY }}
           filename: keystore/release_keystore.jks
           destination-path: android/app
 
