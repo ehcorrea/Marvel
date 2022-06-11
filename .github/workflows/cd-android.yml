@@ -10,7 +10,7 @@ jobs:
   download:
     runs-on: ubuntu-latest
     steps:
-      - name: 'Download artifact'
+      - name: Download artifact
         uses: actions/github-script@v6
         with:
           script: |
@@ -31,19 +31,14 @@ jobs:
             let fs = require('fs');
             fs.writeFileSync(`${process.env.GITHUB_WORKSPACE}/signedReleaseFile.zip`, Buffer.from(download.data));
 
-      - name: 'Unzip artifact'
+      - name: Unzip artifact
+        id: 'unzip_file'
         run: unzip signedReleaseFile.zip
 
-      - name: 'Comment on PR'
-        uses: actions/github-script@v6
+      - name: Upload artifact to Firebase App Distribution
+        uses: wzieba/Firebase-Distribution-Github-Action@v1
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            let fs = require('fs');
-            let issue_number = Number(fs.readFileSync('./signedReleaseFile'));
-            await github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: issue_number,
-              body: 'Thank you for the PR!'
-            });
+          appId: ${{secrets.ANDROID_FIREBASE_APP_ID}}
+          token: ${{secrets.ANDROID_FIREBASE_TOKEN}}
+          groups: testers
+          file: ${{steps.unzip_file.outputs.signedReleaseFile}}
