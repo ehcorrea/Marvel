@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "823163622432",
+    "project_id": "marvel-ee923",
+    "storage_bucket": "marvel-ee923.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:823163622432:android:a67c71ec0e46701f665845",
+        "android_client_info": {
+          "package_name": "emilio.correa.marvel"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "823163622432-tijqfl6tf355g5g0e526mjjnuhitbelu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQW5V9h01naDRTGsLplZSr4MctsaZRtCA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "823163622432-tijqfl6tf355g5g0e526mjjnuhitbelu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
