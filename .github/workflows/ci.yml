@@ -47,9 +47,7 @@ jobs:
           keyPassword: ${{ secrets.ANDROID_KEY_PASSWORD }}
   
       - name: Save Signed Artifact
-        env: 
-          SIGNED_ARTIFACT: ${{steps.sign_app.outputs.signedReleaseFile}}
-        run: mkdir -p ./artifact echo $SIGNED_ARTIFACT > ./artifact/signedReleaseFile
+        run: mkdir -p ./artifact && cp -R ${{steps.sign_app.outputs.signedReleaseFile}} ./artifact
         
       - uses: actions/upload-artifact@v3
         with:
