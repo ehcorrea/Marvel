@@ -2,7 +2,7 @@ name: Signed Deploy ## name of the workflow
 
 on:
   workflow_run:
-    workflows: [Test Build]
+    workflows: [Upload data]
     types:
       - completed
 
