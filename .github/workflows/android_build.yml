@@ -81,12 +81,12 @@ jobs:
           ## sign generated apk
 
       - name: Decode Keystore
-
+        id: decode_keystore
         uses: timheuer/base64-to-file@v1
 
         with:
-          fileName: 'keystore/release_keystore.jks'
-
+          fileName: 'release_keystore.jks'
+          fileDir: 'android/app'
           encodedString: ${{ secrets.ANDROID_SIGNING_KEY }}
 
       - name: Generate App APK
