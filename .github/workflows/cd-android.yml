@@ -1,7 +1,8 @@
 name: Signed Deploy ## name of the workflow
 
 on:
-  workflows: [Test Build]
+  workflow_run:
+    workflows: [Test Build]
     types:
       - completed
 
@@ -12,7 +13,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
       - name: upload artifact to Firebase App Distribution
 
         uses: wzieba/Firebase-Distribution-Github-Action@v1
