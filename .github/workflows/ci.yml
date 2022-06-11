@@ -51,7 +51,7 @@ jobs:
           SIGNED_ARTIFACT: ${{steps.sign_app.outputs.signedReleaseFile}}
         run: mkdir -p ./artifact echo $SIGNED_ARTIFACT > ./artifact/signedReleaseFile
         
-      - uses: actions/upload-artifact@v
+      - uses: actions/upload-artifact@v3
         with:
           name: signedReleaseFile
           path: artifact/
