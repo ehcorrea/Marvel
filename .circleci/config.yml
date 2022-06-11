@@ -1,23 +1,29 @@
-version: 2.1
+version: 2
 jobs:
   build:
-    working_directory: ~/repo
     docker:
-      - image: cimg/node:18.3.0
+      - image: node:16.15.1
+
+    working_directory: ~/repo
+
     steps:
       - checkout
-      - run:
-          name: Update NPM
-          command: 'sudo npm install -g npm@5'
+
+      # Download and cache dependencies
       - restore_cache:
-          key: dependency-cache-{{ checksum "package-lock.lock" }}
-      - run:
-          name: Install Dependencies
-          command: yarn
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+
+      - run: yarn install
+
       - save_cache:
-          key: dependency-cache-{{ checksum "package-lock" }}
           paths:
-            - ./node_modules
-      - run:
-          name: Run tests
-          command: yarn test
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+
+      # run tests!
+      - run: yarn test
+
+      - run: yarn build
