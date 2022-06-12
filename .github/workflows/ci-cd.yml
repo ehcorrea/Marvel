@@ -90,7 +90,7 @@ jobs:
         id: download_artifact
         uses: actions/download-artifact@v3
         with: 
-          name: SignedRelease
+          name: Signed Release
           
       - name: Display structure of downloaded files
         run: ls -R
@@ -101,6 +101,6 @@ jobs:
           appId: ${{secrets.ANDROID_FIREBASE_APP_ID}}
           token: ${{secrets.ANDROID_FIREBASE_TOKEN}}
           groups: testers
-          file: ./SignedRelease
+          file: ./app-release-unsigned-signed.apk
           
         
