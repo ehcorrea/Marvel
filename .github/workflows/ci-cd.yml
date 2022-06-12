@@ -77,7 +77,7 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@master
         with:
-          name: SignedRelease
+          name: Signed Release
           path: ${{steps.sign_app.outputs.signedReleaseFile}}
       
   deploy-android:
