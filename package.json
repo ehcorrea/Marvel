@@ -14,10 +14,10 @@
     "generate": "yarn plop --plopfile generators/plopfile.js",
     "release:android": "cd android && ./gradlew assembleRelease",
     "np": "np --no-publish",
-    "postversion": "react-native-version"
+    "postversion": "react-native-version",
+    "postinstall": "husky install"
   },
   "dependencies": {
-    "@hookform/resolvers": "^2.8.10",
     "@react-native-async-storage/async-storage": "^1.17.5",
     "@react-native-firebase/app": "^14.11.0",
     "@react-native-firebase/crashlytics": "^14.11.0",
