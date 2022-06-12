@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  lint-test:
+  prepare-node-modules:
     runs-on: ubuntu-latest
 
     steps:
