@@ -37,23 +37,17 @@ jobs:
       - name: Run Tests
         run: yarn test
     
-  build:
+  build-assemble-release:
+    if: github.ref == 'refs/heads/release'
     runs-on: ubuntu-latest
     
     needs: lint-test
 
     steps:
-      - name: Check out Git repository
-        uses: actions/checkout@v3
-    
       - name: Set up our JDK environment
         uses: actions/setup-java@v1.4.3
         with:
           java-version: 11
-      
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
 
       - name: Restore node_modules from cache
         uses: actions/cache@v2
@@ -67,10 +61,6 @@ jobs:
             ${{ runner.os }}-yarn-${{ env.cache-name }}-
             ${{ runner.os }}-yarn-
             ${{ runner.os }}-
-      
-      - name: Install dependencies
-        if: steps.yarn-cache.outputs.cache-hit != 'true'
-        run: yarn install
         
       - name: Cache Gradle Wrapper
         uses: actions/cache@v2
@@ -114,11 +104,87 @@ jobs:
         with:
           name: Signed Release
           path: ${{steps.sign_app.outputs.signedReleaseFile}}
-      
-  deploy-android:
+          
+          
+  build-bundle-release:
+    if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     
-    needs: build 
+    needs: lint-test
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v3
+    
+      - name: Set up our JDK environment
+        uses: actions/setup-java@v1.4.3
+        with:
+          java-version: 11
+      
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Restore node_modules from cache
+        uses: actions/cache@v2
+        id: yarn-cache
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-yarn-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-${{ env.cache-name }}-
+            ${{ runner.os }}-yarn-
+            ${{ runner.os }}-
+        
+      - name: Cache Gradle Wrapper
+        uses: actions/cache@v2
+        with:
+          path: ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-wrapper-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
+
+      - name: Cache Gradle Dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-caches-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-caches-
+        
+      - name: Make Gradlew Executable
+        run: cd android && chmod +x ./gradlew
+       
+      - name: Generate App APK
+        env:
+          REACT_APP_SECRETE: ${{ secrets.REACT_APP_SECRETE }}
+          REACT_APP_ONESIGINAL_APP_ID: ${{ secrets.REACT_APP_ONESIGINAL_APP_ID }}
+          REACT_APP_MARVEL_PUBLIC_KEY: ${{ secrets.REACT_APP_MARVEL_PUBLIC_KEY }}
+          REACT_APP_MARVEL_PRIVATE_KEY: ${{ secrets.REACT_APP_MARVEL_PRIVATE_KEY }}
+          
+        run: |
+            cd android && ./gradlew bundleRelease --no-daemon
+
+      - name: Sign APK
+        id: sign_app
+        uses: r0adkll/sign-android-release@v1
+        with:
+          releaseDirectory: android/app/build/outputs/bundle/release/app-release.aab
+          signingKeyBase64: ${{ secrets.ANDROID_SIGNING_KEY }}
+          alias: ${{ secrets.ANDROID_ALIAS }}
+          keyStorePassword: ${{ secrets.ANDROID_KEY_STORE_PASSWORD }}
+          keyPassword: ${{ secrets.ANDROID_KEY_PASSWORD }}
+          
+      - name: Upload Artifact
+        uses: actions/upload-artifact@master
+        with:
+          name: Signed Bundle
+          path: ${{steps.sign_app.outputs.signedReleaseFile}}
+      
+  deploy-firebase:
+    runs-on: ubuntu-latest
+    
+    needs: build-assemble-release 
     
     steps:
       - name: Download Artifact
@@ -134,4 +200,24 @@ jobs:
           groups: testers
           file: ./app-release-unsigned-signed.apk
           
+  deploy-play-store:
+    runs-on: ubuntu-latest
+  
+    needs: build-bundle-release 
+    
+    steps:
+      - name: Download Artifact
+        uses: actions/download-artifact@v3
+        with: 
+          name: Signed Bundle
+          
+      - name: Upload App to Google Play
+        uses: r0adkll/upload-google-play@v1
+        with:
+          serviceAccountJsonPlainText: ${{ secrets.ANDROID_SERVICE_ACCOUNT_JSON_TEXT }}
+          packageName: emilio.correa.marvel
+          releaseFiles: ./app-release-signed.aab
+          track: alpha
+          status: completed
+          inAppUpdatePriority: 2
         
