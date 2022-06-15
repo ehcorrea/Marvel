@@ -12,15 +12,17 @@ describe('<FavoriteButton/>', () => {
     const onPressMock = jest.fn();
     const LABEL_TEXT = 'Add Your Character';
 
-    const { getByLabelText, getByText } = renderWithTheme(
+    const { getByLabelText, getByText, getByTestId } = renderWithTheme(
       <FavoriteButton onPress={onPressMock} />
     );
 
+    const animatedView = getByTestId('animated-view');
     const touchableElement = getByLabelText(LABEL_TEXT);
 
     fireEvent.press(touchableElement);
 
     expect(onPressMock).toBeCalled();
+    expect(animatedView).toHaveStyle({ left: 0 });
     expect(getByLabelText(LABEL_TEXT)).toBeTruthy();
     expect(getByLabelText(`click add Character icon`)).toBeTruthy();
     expect(getByText(LABEL_TEXT)).toBeTruthy();
