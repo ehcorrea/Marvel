@@ -7,6 +7,7 @@ const BannerSlider = ({ data }: BannerSliderProps) => {
   return (
     <S.Wrapper>
       <S.Slider
+        accessibilityLabel="banner slider"
         data={data}
         showsHorizontalScrollIndicator={false}
         horizontal
