@@ -19,6 +19,9 @@ describe('<Banner/>', () => {
     const touchableElement = getByLabelText(`${BANNER_MOCK.name} banner`);
     fireEvent.press(touchableElement);
 
+    expect(touchableElement.props.source).toEqual({
+      uri: BANNER_MOCK.image,
+    });
     expect(onPressMock).toHaveBeenCalled();
   });
 });
