@@ -92,7 +92,7 @@ const Home = () => {
           <SearchButton />
         </S.SearchBox>
         <S.CommicSection>
-          <BannerSlider items={charactersDataToBannerSlider} />
+          <BannerSlider data={charactersDataToBannerSlider} />
         </S.CommicSection>
 
         <S.CharactersSection>
