@@ -7,7 +7,7 @@ import { NotificationProps } from './types';
 const Notification = ({ children }: NotificationProps) => {
   useEffect(() => {
     OneSignal.setAppId(REACT_APP_ONESIGINAL_APP_ID);
-  }, []);
+  });
 
   return children;
 };
