@@ -97,7 +97,7 @@ const Home = () => {
 
         <S.CharactersSection>
           <S.Title>Commics</S.Title>
-          <InfoCardSlider items={comicDataToCardInfoSlider} />
+          <InfoCardSlider data={comicDataToCardInfoSlider} />
         </S.CharactersSection>
 
         <S.FavouritesSection style={{ flex: 1 }}>
