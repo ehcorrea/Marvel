@@ -76,7 +76,7 @@ jobs:
           name: Signed Release
           path: ${{steps.sign_app.outputs.signedReleaseFile}}
 
-  deploy-firebase:
+  deploy:
     runs-on: ubuntu-latest
 
     needs: build
