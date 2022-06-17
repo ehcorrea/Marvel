@@ -1,73 +1,57 @@
 import React from 'react';
-
-import { fireEvent } from '@testing-library/react-native';
+import { fireEvent, waitFor } from '@testing-library/react-native';
 
 import { renderWithTheme } from '../../util/tests/helper';
 
-import SearchInput from './';
-
-jest.useFakeTimers();
-
-const BUTTON_LABEL = 'button to focus search field';
-const INPUT_LABEL = 'search field';
-const ICON_CLEAR_LABEL = 'clear search field';
-const ICON_ARROW_BACK = 'back button';
+import SearchInput from '.';
 
 describe('<SearchInput/>', () => {
-  it('should render component button', () => {
-    const handleChangeFocusMock = jest.fn();
+  it('should render component button when focused is false', async () => {
+    let inputValue = false;
+    const handleChangeInputValue = jest.fn(() => {
+      inputValue = !inputValue;
+    });
 
-    const { getByLabelText, queryByLabelText } = renderWithTheme(
-      <SearchInput focused={false} handleChangeFocus={handleChangeFocusMock} />
-    );
-
-    const button = getByLabelText(BUTTON_LABEL);
-    const input = queryByLabelText(INPUT_LABEL);
-
-    expect(input).toBeFalsy();
-
-    fireEvent.press(button);
-
-    expect(handleChangeFocusMock).toBeCalled();
-  });
-
-  it('should render input', () => {
-    let newInputValue = '';
-
-    const handleChangeFocusMock = jest.fn();
-    const onChangeTexMock = jest.fn((value: string) => (newInputValue = value));
-    const handleBackArrow = jest.fn();
-
-    const { queryByLabelText, getByLabelText } = renderWithTheme(
+    const unfocusedComponent = renderWithTheme(
       <SearchInput
-        focused
-        value={INPUT_LABEL}
-        handleChangeFocus={handleChangeFocusMock}
-        onChangeText={onChangeTexMock}
-        handleBackArrow={handleBackArrow}
+        focused={inputValue}
+        handleChangeFocus={handleChangeInputValue}
       />
     );
 
-    const backButton = getByLabelText(ICON_ARROW_BACK);
-    const button = queryByLabelText(BUTTON_LABEL);
-    const clearButton = getByLabelText(ICON_CLEAR_LABEL);
-    const input = getByLabelText(INPUT_LABEL);
+    const animatedElement = unfocusedComponent.getByTestId('animated-wrapper');
+    const button = unfocusedComponent.getByLabelText('focus to search field');
+    let input = unfocusedComponent.queryByLabelText('search field');
 
-    expect(backButton).toBeTruthy();
-    expect(button).toBeFalsy();
-    expect(clearButton).toBeTruthy();
-    expect(input.props.value).toEqual(INPUT_LABEL);
+    expect(animatedElement).toHaveStyle({ borderRadius: 4, margin: 8 });
+    expect(button).toBeTruthy();
+    expect(input).toBeFalsy();
 
-    fireEvent.changeText(input, 'new value');
-    fireEvent.press(backButton);
+    fireEvent.press(button);
+    expect(handleChangeInputValue).toBeCalled();
 
-    expect(onChangeTexMock).toBeCalled();
-    expect(handleBackArrow).toBeCalled();
-    expect(newInputValue).toEqual('new value');
+    const foscusedComponent = renderWithTheme(
+      <SearchInput
+        focused={inputValue}
+        handleChangeFocus={handleChangeInputValue}
+      />
+    );
 
-    fireEvent.press(clearButton);
+    input = foscusedComponent.getByLabelText('search field');
+    const animatedElementFocusedComponent =
+      foscusedComponent.getByTestId('animated-wrapper');
+    const focusedComponentButton = foscusedComponent.queryByLabelText(
+      'focus to search field'
+    );
 
-    expect(onChangeTexMock).toBeCalledTimes(2);
-    expect(newInputValue).toEqual('');
+    expect(input).toBeTruthy();
+    expect(focusedComponentButton).toBeFalsy();
+
+    await waitFor(() => {
+      expect(animatedElementFocusedComponent).toHaveStyle({
+        borderRadius: 0,
+        margin: 0,
+      });
+    });
   });
 });
