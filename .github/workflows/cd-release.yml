@@ -2,7 +2,7 @@ name: CD Release
 
 on:
   workflow_run:
-    workflows: [CD Release]
+    workflows: [CI Release]
     types:
       - completed
   
