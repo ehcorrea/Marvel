@@ -1,35 +1,57 @@
 import React from 'react';
-import { fireEvent } from '@testing-library/react-native';
+import { fireEvent, waitFor } from '@testing-library/react-native';
 
 import { renderWithTheme } from '../../util/tests/helper';
+
 import SearchInput from '.';
 
 describe('<SearchInput/>', () => {
-  it('shound render component and elements, change and clear input value', () => {
-    const onChangeMock = jest.fn();
-    const { getByLabelText, queryByLabelText } = renderWithTheme(
-      <SearchInput onChangeText={onChangeMock} />
-    );
-
-    const textInput = getByLabelText('search input');
-
-    expect(getByLabelText('search input')).toHaveStyle({
-      flex: 1,
-      color: 'white',
+  it('should render component button when focused is false', async () => {
+    let inputValue = false;
+    const handleChangeInputValue = jest.fn(() => {
+      inputValue = !inputValue;
     });
 
-    //test icons
-    expect(getByLabelText('search icon')).toBeTruthy();
-    expect(queryByLabelText('clear icon')).toBeFalsy();
+    const unfocusedComponent = renderWithTheme(
+      <SearchInput
+        focused={inputValue}
+        handleChangeFocus={handleChangeInputValue}
+      />
+    );
 
-    //input text
-    fireEvent.changeText(textInput, 'onChangeText');
-    expect(textInput.props.value).toEqual('onChangeText');
-    expect(queryByLabelText('search icon')).toBeFalsy();
-    expect(queryByLabelText('clear icon')).toBeTruthy();
+    const animatedElement = unfocusedComponent.getByTestId('animated-wrapper');
+    const button = unfocusedComponent.getByLabelText('focus to search field');
+    let input = unfocusedComponent.queryByLabelText('search field');
 
-    //clear input
-    fireEvent.press(getByLabelText('clear icon'));
-    expect(textInput.props.value).toEqual('');
+    expect(animatedElement).toHaveStyle({ borderRadius: 4, margin: 8 });
+    expect(button).toBeTruthy();
+    expect(input).toBeFalsy();
+
+    fireEvent.press(button);
+    expect(handleChangeInputValue).toBeCalled();
+
+    const foscusedComponent = renderWithTheme(
+      <SearchInput
+        focused={inputValue}
+        handleChangeFocus={handleChangeInputValue}
+      />
+    );
+
+    input = foscusedComponent.getByLabelText('search field');
+    const animatedElementFocusedComponent =
+      foscusedComponent.getByTestId('animated-wrapper');
+    const focusedComponentButton = foscusedComponent.queryByLabelText(
+      'focus to search field'
+    );
+
+    expect(input).toBeTruthy();
+    expect(focusedComponentButton).toBeFalsy();
+
+    await waitFor(() => {
+      expect(animatedElementFocusedComponent).toHaveStyle({
+        borderRadius: 0,
+        margin: 0,
+      });
+    });
   });
 });

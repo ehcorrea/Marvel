@@ -1,7 +1,7 @@
 import { InfoCardSliderProps } from './types';
 
 const INFO_CARD_SLIDER_MOCK: InfoCardSliderProps = {
-  items: [
+  data: [
     {
       image: 'https://via.placeholder.com/150',
       name: 'Hero Mock 1',

@@ -42,6 +42,7 @@ export const Wrapper = styled.TouchableOpacity<ModifierProps>`
     align-items: center;
     align-self: flex-start;
     border-radius: ${theme.border.radius.xsmall};
+    width: 120px;
 
     ${wrapperModifiers[size!]()}
   `}

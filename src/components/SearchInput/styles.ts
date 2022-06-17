@@ -1,21 +1,12 @@
 import styled, { css } from 'styled-components/native';
 
-export const Wrapper = styled.View`
-  ${({ theme }) => css`
-    align-items: center;
-    background-color: ${theme.colors.secondary};
-    border-radius: ${theme.border.radius.large};
-    border: 2px solid ${theme.colors.primary};
-    display: flex;
-    flex-direction: row;
-    height: ${theme.spacings.huge};
-    padding: 0 ${theme.spacings.large};
-  `}
-`;
+import { Animated } from 'react-native';
 
-export const Icon = styled.Image`
+export const Wrapper = styled(Animated.View)`
   ${({ theme }) => css`
-    height: ${theme.spacings.xsmall};
-    width: ${theme.spacings.xsmall};
+    background-color: ${theme.colors.secondary};
+    border: solid 2px ${theme.colors.primary};
+    flex: 1;
+    max-height: 55px;
   `}
 `;

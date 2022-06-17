@@ -1,3 +1,5 @@
-import { TextInputProps } from 'react-native';
-
-export type SearchInputProps = TextInputProps;
+export type SearchInputProps = {
+  focused: boolean;
+  handleChangeFocus: (value?: boolean, forceValue?: boolean) => void;
+  onChangeText?: (text: string) => void;
+};
