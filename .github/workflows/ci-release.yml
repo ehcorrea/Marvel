@@ -3,7 +3,8 @@ name: CII
 on:
   workflow_run:
     workflows: ["CI"]
-
+  workflow_dispatch:
+  
 jobs:
   lint-test:
     runs-on: ubuntu-latest
