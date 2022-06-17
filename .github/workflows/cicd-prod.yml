@@ -51,9 +51,6 @@ jobs:
             
       - name: Make Gradlew Executable
         run: cd android && chmod +x ./gradlew
-    
-      - name: Check out Git repository
-        uses: actions/checkout@v3
         
       - name: Generate App AAB
         env:
