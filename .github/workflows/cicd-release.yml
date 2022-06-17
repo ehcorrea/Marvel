@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  prepare:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -45,12 +45,6 @@ jobs:
             
       - name: Make Gradlew Executable
         run: cd android && chmod +x ./gradlew
-
-  build:
-    runs-on: ubuntu-latest
-    needs: prepare
-
-    steps:
       - name: Generate App APK
         env:
           REACT_APP_SECRETE: ${{ secrets.REACT_APP_SECRETE }}
