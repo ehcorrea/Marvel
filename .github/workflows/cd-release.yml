@@ -1,8 +1,8 @@
-name: CI Release
+name: CD Release
 
 on:
   workflow_run:
-    workflows: [CI Release]
+    workflows: [CD Release]
     types:
       - completed
   
