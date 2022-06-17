@@ -1,0 +1,25 @@
+name: CD Release
+
+on:
+  workflow_run:
+    workflows: [CI Release]
+    types:
+      - completed
+  
+jobs:
+  deploy-firebase:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Download Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: Signed Release
+
+      - name: Upload artifact to Firebase App Distribution
+        uses: wzieba/Firebase-Distribution-Github-Action@v1
+        with:
+          appId: ${{secrets.ANDROID_FIREBASE_APP_ID}}
+          token: ${{secrets.ANDROID_FIREBASE_TOKEN}}
+          groups: testers
+          file: ./app-release-unsigned-signed.apk
