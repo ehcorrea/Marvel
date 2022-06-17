@@ -1,6 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { TouchableWithoutFeedback } from 'react-native';
-import { Keyboard } from 'react-native';
+import { Keyboard, TouchableWithoutFeedback } from 'react-native';
 
 import { SearchInput } from '../../components';
 
@@ -11,10 +10,10 @@ const Search = () => {
   const [searchValue, setSearchValue] = useState('');
 
   const handleChangeFocus = useCallback(
-    (value?: boolean) => {
+    (value?: boolean, forceValue?: boolean) => {
       Keyboard.dismiss();
 
-      if (searchValue) {
+      if (searchValue && !forceValue) {
         return null;
       }
 
@@ -27,29 +26,22 @@ const Search = () => {
     [searchValue]
   );
 
-  const handleResetSearchInput = () => {
-    setIsFocused(false);
-    setSearchValue('');
-  };
-
   const handleSearchChangeText = (value: string) => {
     setSearchValue(value);
   };
 
   return (
-    <S.Wrapper>
-      <TouchableWithoutFeedback onPress={() => handleChangeFocus(false)}>
+    <TouchableWithoutFeedback onPress={() => handleChangeFocus(false)}>
+      <S.Wrapper>
         <S.SearchBox>
           <SearchInput
-            value={searchValue}
-            handleBackArrow={handleResetSearchInput}
             focused={isFocused}
             handleChangeFocus={handleChangeFocus}
             onChangeText={handleSearchChangeText}
           />
         </S.SearchBox>
-      </TouchableWithoutFeedback>
-    </S.Wrapper>
+      </S.Wrapper>
+    </TouchableWithoutFeedback>
   );
 };
 

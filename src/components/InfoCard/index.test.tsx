@@ -20,6 +20,7 @@ describe('<CharacterCard', () => {
 
     expect(onPressMock).toHaveBeenCalled();
     expect(getByText(INFO_CARD_MOCK.name)).toBeTruthy();
+    expect(imageElement.props.source).toEqual({ uri: INFO_CARD_MOCK.image });
     expect(imageElement).toHaveStyle({
       width: 45,
       height: 45,

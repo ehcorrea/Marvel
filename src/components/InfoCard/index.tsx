@@ -16,12 +16,7 @@ const InfoCard = ({
     !!subTitle && <S.SubTitle>{subTitle}</S.SubTitle>;
 
   return (
-    <S.Wrapper
-      accessibilityLabel={`${name} card`}
-      size={size}
-      style={{ width: 120 }}
-      {...props}
-    >
+    <S.Wrapper size={size} {...props}>
       <S.Image
         accessibilityLabel={`${name} image`}
         size={size}

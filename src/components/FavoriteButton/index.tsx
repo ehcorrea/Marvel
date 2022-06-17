@@ -20,7 +20,7 @@ const FavoriteButton = ({
   onPress,
   withAnimation,
 }: FavoriteButtonProps) => {
-  const sharedValue = useSharedValue(0);
+  const leftAnimatedView = useSharedValue(0);
   const textLabel = title || `Add Your ${contentType}`;
 
   const iconLabel = title
@@ -31,19 +31,19 @@ const FavoriteButton = ({
 
   const handlePress = () => {
     if (withAnimation) {
-      sharedValue.value = withSequence(withTiming(100), withTiming(0));
+      leftAnimatedView.value = withSequence(withTiming(100), withTiming(0));
       return setTimeout(onPress, 500);
     }
-    onPress?.();
+    onPress();
   };
 
-  const animatedStyles = useAnimatedStyle(() => {
-    return { left: sharedValue.value };
+  const viewAnimatedStyles = useAnimatedStyle(() => {
+    return { left: leftAnimatedView.value };
   });
 
   return (
     <S.Wrapper onPress={handlePress} accessibilityLabel={textLabel}>
-      <S.View style={animatedStyles}>
+      <S.View style={viewAnimatedStyles} testID="animated-view">
         <S.Title>{textLabel}</S.Title>
         <S.Icon source={iconImage} accessibilityLabel={iconLabel} />
       </S.View>
